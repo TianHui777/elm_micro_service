@@ -1,0 +1,40 @@
+server:
+  port: 9902
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/hu-qianqian-bug/elm-config.git
+          username: 970921208@qq.com
+          password: 970921208@qq.com
+          default-label: main
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    busrefresh:
+      enabled: true
+    health:
+      show-details: always
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaServer1:9901/eureka, http://eurekaServer2:7901/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+

@@ -1,0 +1,45 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+    config:
+      name: orderServer
+      profile: dev
+      label: master
+#      uri: http://localhost:9902
+      discovery:
+        enabled: true
+        service-id: CONFIG-SERVER
+resilience4j.circuitbreaker:
+  instances:
+    example:
+      waitDurationInOpenState: 5000ms # 熔断器状态为OPEN时等待时间
+      failureRateThreshold: 50 # 失败率阈值，超过该阈值熔断器会打开
+      permittedNumberOfCallsInHalfOpenState: 2 # 熔断器状态为HALF_OPEN时允许的最大请求数
+      recordExceptions:
+        - org.springframework.web.client.HttpClientErrorException # 需要记录的异常类型
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    busrefresh:
+      enabled: true
+    health:
+      show-details: always
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaServer1:9901/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}

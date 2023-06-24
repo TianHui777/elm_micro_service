@@ -1,0 +1,80 @@
+server:
+  port: 16000
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: gateway-server
+  cloud:
+    gateway:
+      default-filters:
+        - GlobalFallbackFilter
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://127.0.0.1:5173/"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowCredentials: true
+
+        add-to-simple-url-handler-mapping: true
+
+      routes:
+        - id: user-server
+          uri: lb://user-server
+          predicates:
+            - Path=/User/**
+          filters:
+            - UserFallbackFilter
+
+        - id: food-server
+          uri: lb://food-server
+          predicates:
+            - Path=/Food/**
+          filters:
+            - FoodFallbackFilter
+
+        - id: business-server
+          uri: lb://business-server
+          predicates:
+            - Path=/Business/**
+          filters:
+            - BusinessFallbackFilter
+
+        - id: cart-server
+          uri: lb://cart-server
+          predicates:
+            - Path=/Cart/**
+          filters:
+            - CartFallbackFilter
+
+        - id: deliveryAddress-server
+          uri: lb://deliveryAddress-server
+          predicates:
+            - Path=/DeliveryAddress/**
+          filters:
+            - DeliveryAddressFallbackFilter
+
+        - id: order-server
+          uri: lb://order-server
+          predicates:
+            - Path=/Orders/**
+          filters:
+            - OrderFallbackFilter
+
+
+
+
+
+#eureka??
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaServer1:9901/eureka/,http://eurekaServer2:7901/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}

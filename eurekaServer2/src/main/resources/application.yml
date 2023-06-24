@@ -1,0 +1,17 @@
+server:
+  port: 7901
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    hostname: eurekaServer2
+  client:
+    healthcheck:
+      enabled: true
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://eurekaServer1:9901/eureka/
+    fetch-registry: false
+    registry-fetch-interval-seconds: 30
+  server:
+    enable-self-preservation: false

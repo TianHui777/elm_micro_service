@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.0.6</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <groupId>org.example</groupId>
+  <artifactId>elm</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>elm</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <mysql-version>8.0.30</mysql-version>
+    <java.version>17</java.version>
+<!--    <spring-cloud.version>2021.0.1</spring-cloud.version>-->
+    <spring-cloud.version>2022.0.1</spring-cloud.version>
+  </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>3.8.1</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-dependencies</artifactId>
+    <version>${spring-cloud.version}</version>
+    <type>pom</type>
+    <scope>import</scope>
+    </dependency>
+  </dependencies>
+  </dependencyManagement>
+  <modules>
+    <module>configServer2</module>
+    <module>eurekaServer1</module>
+    <module>businessServer1</module>
+    <module>userServer1</module>
+    <module>cartServer1</module>
+    <module>deliveryAddressServer1</module>
+    <module>orderServer1</module>
+    <module>foodServer1</module>
+    <module>gateWayServer1</module>
+    <module>eurekaServer2</module>
+    <module>businessServer2</module>
+    <module>cartServer2</module>
+    <module>deliveryAddressServer2</module>
+    <module>foodServer2</module>
+    <module>orderServer2</module>
+    <module>userServer2</module>
+    <module>configServer1</module>
+    <module>gateWayServer2</module>
+
+  </modules>
+
+</project>

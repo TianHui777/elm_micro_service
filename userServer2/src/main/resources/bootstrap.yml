@@ -1,0 +1,31 @@
+spring:
+  cloud:
+    config:
+      name: userServer_11001
+      profile: dev
+      label: master
+      discovery:
+        enabled: true
+        service-id: CONFIG-SERVER
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    busrefresh:
+      enabled: true
+    health:
+      show-details: always
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaServer2:7901/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
